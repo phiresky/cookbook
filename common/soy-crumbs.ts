@@ -19,7 +19,7 @@ const recipe: Recipe = {
         ],
       },
       ingredient: {
-        name: "Textured Soy Crumbs",
+        name: "textured soy crumbs",
         boxes: [
           {
             type: "Info",

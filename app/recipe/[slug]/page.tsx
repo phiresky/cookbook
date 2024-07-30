@@ -1,5 +1,5 @@
 import { getRecipeBySlug } from "@/common/recipes";
-import { ShowRecipe } from "@/common/ShowRecipe";
+import { ShowRecipe } from "@/components/ShowRecipe";
 
 export function generateStaticParams() {
   return [{ slug: "tasty-meaty-soy-crumbs" }];
