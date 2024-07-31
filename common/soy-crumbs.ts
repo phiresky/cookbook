@@ -30,7 +30,7 @@ const recipe: Recipe = {
             text: "After cooking, these have a texture similar to minced meat and we can make them absorb water, fat, and flavourings.",
           },
           {
-            type: "Considerations / Modifications",
+            type: "Considerations",
             text: "Dry soy crumbs absorbs around 2-3 times the weight in water and then even more oil. It results in around 3g of finished product.",
           },
           {
@@ -74,7 +74,7 @@ const recipe: Recipe = {
           },
           {
             type: "Considerations",
-            text: "If you don't do this exactly, you can always add more to taste any time later. You can also add any other flavours you want here, but it can be a waste if you drain your crumbs, and they can burn in the frying step, so I would add them later.",
+            text: "If you don't do this exactly, you can always add more to taste any time later. You can also add any other flavours you want here, but it can be a waste if you need to drain your crumbs, and spices can burn in the frying step, so I would add them later.",
           },
         ],
       },
@@ -94,7 +94,7 @@ const recipe: Recipe = {
             text: "The water should be hot but does not need to cook during soaking",
           },
           {
-            type: "Considerations / Modifications",
+            type: "Considerations",
             text: "If you use a soy:water ratio of ~1:2.5, they will completely absorb the water. If you don't want to measure, simply use enough to cover them with two centimeters above and strain the crumbs afterwards.",
           },
         ],

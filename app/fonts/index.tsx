@@ -10,6 +10,6 @@ export  const geistMono = localFont({
   });
   
   export const handwriting = localFont({
-    src: "./JustAnotherHand-Regular.ttf",
+    src: "./PatrickHand-Regular.ttf",
     variable: "--font-handwriting",
   })
