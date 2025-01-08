@@ -7,7 +7,7 @@ export type Recipe = {
 export type IngredientStepInstru =
   | {
       instruction: string;
-      boxes?: DetailBox[];
+      detail?: StepDetail
     }
   | IngredientStep;
 export type IngredientStep = {
@@ -19,12 +19,17 @@ type AmountInfo = (
       weight: string;
     }
   | { volume: string } | { count: string}
-) & { boxes?: DetailBox[] };
+) & {detail?: StepDetail };
 
+type StepDetail = {
+  text?: string
+  detailButton?: string;
+  detailText?: {title?: string, text: string}[];
+};
 type IngredientInfo = {
   name: string;
   post_span?: string;
-  boxes?: DetailBox[];
+  detail?: StepDetail
 };
 
 type DetailBox = {

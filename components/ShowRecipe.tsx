@@ -204,9 +204,9 @@ function HintBox({
   redraw: () => void;
   type: "ingredient" | "amount";
 }) {
-  const [visibleBox, setVisibleBox] = useState<string | null>("Considerations");
-  const boxes = "ingredient" in step ? step[type].boxes : null;
-  if (!boxes) return <></>;
+  const [visibleBox, setVisibleBox] = useState<boolean>(false);
+  const detail = "ingredient" in step ? step[type].detail : (type ==="amount" ? step.detail : null);
+  if (!detail) return <></>;
   return (
     <div
       className={`${handwriting.className} bg-white p-2 left-full w-96 overflow-scroll mb-2 text-gray-600`}
@@ -214,21 +214,28 @@ function HintBox({
         e && setBoxLoc(step, e.getBoundingClientRect());
       }}
     >
-      {boxes.map((box, j) => (
+      {detail.text}
+      {detail.detailButton && (
         <button
-          key={j}
-          className={`inline m-1 p-1 underline ${
-            box.type === visibleBox ? "underline text-black" : "text-gray-500"
-          }`}
+          className="underline"
           onClick={() => {
-            setVisibleBox(visibleBox === box.type ? null : box.type);
+            setVisibleBox(!visibleBox);
             redraw();
           }}
         >
-          {box.type}
+          {visibleBox ? "▲" : "▼"} {detail.detailButton}
         </button>
-      ))}
-      <div>{visibleBox && boxes.find((b) => b.type === visibleBox)?.text}</div>
+      )}
+      {visibleBox &&
+        detail.detailText?.map((box, j) => (
+          <><h3
+            key={j}
+            className={`underline ${"text-black"}`}
+          >
+            {box.title}
+          </h3>
+          {box.text}</>
+        ))}
     </div>
   );
 }
