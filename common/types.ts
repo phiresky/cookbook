@@ -1,5 +1,6 @@
 export type Recipe = {
   title: string;
+  main_picture: string;
   preamble: string[];
   ingredient_steps: IngredientStepInstru[];
 };
@@ -17,7 +18,7 @@ type AmountInfo = (
   | {
       weight: string;
     }
-  | { volume: string }
+  | { volume: string } | { count: string}
 ) & { boxes?: DetailBox[] };
 
 type IngredientInfo = {

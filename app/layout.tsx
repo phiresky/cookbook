@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fonts.geistSans.variable} ${fonts.geistMono.variable} ${fonts.handwriting.variable}`}
+        className={`${fonts.geistSans.variable} ${fonts.geistMono.variable} ${fonts.handwriting.variable} font-sans`}
       >
         {children}
       </body>

@@ -11,6 +11,7 @@ import { IngredientStep, Recipe, IngredientStepInstru } from "../common/types";
 import { RoughSvg } from "./RoughSvg";
 import { handwriting } from "@/app/fonts";
 import { RoughSVG } from "roughjs/bin/svg";
+import Image from "next/image";
 
 type BoxVal = Partial<{
   name: DOMRect;
@@ -47,16 +48,16 @@ export function ShowRecipe({ recipe }: { recipe: Recipe }) {
             svg.appendChild(
               rc.line(
                 box.right + 10,
-                box.y + box.height / 2,
+                window.scrollY + box.y + box.height / 2,
                 detailBox.left,
-                detailBox.y + detailBox.height / 2,
+                window.scrollY + detailBox.y + detailBox.height / 2,
                 { roughness: 2, stroke: color, disableMultiStroke: true }
               )
             );
             svg.appendChild(
               rc.rectangle(
                 detailBox.x,
-                detailBox.y,
+                window.scrollY + detailBox.y,
                 detailBox.width,
                 detailBox.height,
                 { stroke: color }
@@ -73,16 +74,16 @@ export function ShowRecipe({ recipe }: { recipe: Recipe }) {
             svg.appendChild(
               rc.line(
                 box.left,
-                box.y + box.height / 2,
+                window.scrollY + box.y + box.height / 2,
                 detailBox.right,
-                detailBox.y + detailBox.height / 2,
+                window.scrollY + detailBox.y + detailBox.height / 2,
                 { roughness: 2, stroke: color, disableMultiStroke: true }
               )
             );
             svg.appendChild(
               rc.rectangle(
                 detailBox.x,
-                detailBox.y,
+                window.scrollY + detailBox.y,
                 detailBox.width,
                 detailBox.height,
                 { stroke: color }
@@ -93,6 +94,7 @@ export function ShowRecipe({ recipe }: { recipe: Recipe }) {
       }),
     [drawingCounter]
   );
+  const [hintBoxYStart, setHintBoxYStart] = useState<number | null>(null);
 
   return (
     <div
@@ -100,7 +102,8 @@ export function ShowRecipe({ recipe }: { recipe: Recipe }) {
       style={{ gridTemplateColumns: "1fr auto 1fr" }}
     >
       <div className="max-w-sm mt-10">
-      <HintBoxes
+        <div style={{ height: hintBoxYStart + "px" }} />
+        <HintBoxes
           recipe={recipe}
           type="amount"
           setBoxLoc={(a, b) => ingredientBoxes.set(a, { leftDetail: b })}
@@ -109,11 +112,19 @@ export function ShowRecipe({ recipe }: { recipe: Recipe }) {
       </div>
       <div className="max-w-lg mt-6 mx-auto">
         <h1 className="text-xl mb-3">{recipe.title}</h1>
+        <img src={recipe.main_picture} alt="Picture of soy crumbs" />
         {recipe.preamble.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
         <hr />
-        <div className="grid grid-cols-[1fr_3fr] gap-x-2">
+        <div
+          className="grid grid-cols-[1fr_3fr] gap-x-2"
+          ref={(d) =>
+            setHintBoxYStart(
+              window.scrollY + (d?.getBoundingClientRect().top ?? 0) - 100
+            )
+          }
+        >
           {recipe.ingredient_steps.map((step, i) => {
             if ("ingredient" in step) {
               return (
@@ -123,8 +134,10 @@ export function ShowRecipe({ recipe }: { recipe: Recipe }) {
             return (
               <Fragment key={i}>
                 <div />
-                <div key={i} className="">
-                  <p className="text-gray-700">{step.instruction}</p>
+                <div key={i} className="z-10">
+                  <p className="text-gray-700">
+                    <span className="bg-white">{step.instruction}</span>
+                  </p>
                 </div>
               </Fragment>
             );
@@ -139,6 +152,7 @@ export function ShowRecipe({ recipe }: { recipe: Recipe }) {
         </button>
       </div>
       <div className="max-w-sm mt-10">
+        <div style={{ height: hintBoxYStart + "px" }} />
         <HintBoxes
           recipe={recipe}
           type="ingredient"
@@ -163,12 +177,18 @@ function HintBoxes({
   recipe: Recipe;
   setBoxLoc: (ingredient: IngredientStepInstru, boxLoc: DOMRect) => void;
   redraw: () => void;
-  type: "ingredient" | "amount"
+  type: "ingredient" | "amount";
 }) {
   return (
     <>
       {recipe.ingredient_steps.map((step, i) => (
-        <HintBox step={step} key={i} setBoxLoc={setBoxLoc} redraw={redraw} type={type} />
+        <HintBox
+          step={step}
+          key={i}
+          setBoxLoc={setBoxLoc}
+          redraw={redraw}
+          type={type}
+        />
       ))}
     </>
   );
@@ -182,14 +202,14 @@ function HintBox({
   step: IngredientStepInstru;
   setBoxLoc: (ingredient: IngredientStepInstru, boxLoc: DOMRect) => void;
   redraw: () => void;
-  type: "ingredient" | "amount"
+  type: "ingredient" | "amount";
 }) {
   const [visibleBox, setVisibleBox] = useState<string | null>("Considerations");
   const boxes = "ingredient" in step ? step[type].boxes : null;
   if (!boxes) return <></>;
   return (
     <div
-      className={`${handwriting.className} bg-white p-2 left-full w-96 overflow-scroll mb-2`}
+      className={`${handwriting.className} bg-white p-2 left-full w-96 overflow-scroll mb-2 text-gray-600`}
       ref={(e) => {
         e && setBoxLoc(step, e.getBoundingClientRect());
       }}
@@ -198,7 +218,7 @@ function HintBox({
         <button
           key={j}
           className={`inline m-1 p-1 underline ${
-            box.type === visibleBox ? "text-black" : "text-gray-500"
+            box.type === visibleBox ? "underline text-black" : "text-gray-500"
           }`}
           onClick={() => {
             setVisibleBox(visibleBox === box.type ? null : box.type);
@@ -224,25 +244,33 @@ function Ingredient({
 }) {
   return (
     <>
-      <div className="text-right">
+      <div className="text-right z-10">
         <span
+          className="bg-white"
           ref={(e) => {
             e && boxes.set(step, { amount: e.getBoundingClientRect() });
           }}
         >
-          {"weight" in step.amount ? step.amount.weight : step.amount.volume}
+          {"weight" in step.amount
+            ? step.amount.weight
+            : "count" in step.amount
+            ? step.amount.count
+            : step.amount.volume}
         </span>
       </div>
       <div>
-        <div className="relative">
+        <div className="relative z-10">
           <span
+            className="bg-white"
             ref={(e) => {
               e && boxes.set(step, { name: e.getBoundingClientRect() });
             }}
           >
             {step.ingredient.name}
           </span>
-          {step.ingredient.post_span || ""}
+          <span className="text-gray-700 bg-white">
+            {step.ingredient.post_span || ""}
+          </span>
         </div>
       </div>
     </>

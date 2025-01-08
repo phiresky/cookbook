@@ -3,9 +3,10 @@ import { Recipe } from "./types";
 const recipe: Recipe = {
   title: "Tasty Meaty Soy Crumbs",
   preamble: [
-    "Prepared properly, textured soy is a tasty and cheap ingredient you can use anywhere you would use minced meat: In a pasta sauce, in a chili con carne, in a potato casserole, lasagne, etc. You can also prepare it in bulk and freeze it.",
+    "Prepared properly, textured soy is a tasty and cheap ingredient you can use anywhere you would use minced meat: In a pasta sauce, in chili con carne, in a potato casserole, lasagne, etc. You can also prepare it in bulk and freeze it.",
     "The raw ingredients keep forever so you can always have some around.",
   ],
+  main_picture: "tasty-meaty-soy-crumbs/soy-crumbs-2.jpg",
   ingredient_steps: [
     { instruction: "Pour" },
     {
@@ -22,16 +23,16 @@ const recipe: Recipe = {
         name: "textured soy crumbs",
         boxes: [
           {
-            type: "Info",
+            type: "Considerations",
+            text: "Dry soy crumbs absorbs around 2-3 times the weight in water and then even more oil. It results in around 3g of finished product.",
+          },
+          {
+            type: "Details",
             text: `Consists of around 50% protein. Also called "Textured Vegetable Protein" (TVP), or "Protein Granules" or "Meatless crumbles". Out of package they smell kind of unappetizing ("like cat food"), cooked they don't taste like anything on their own. Great to have in your kitchen since it keeps basically forever.`,
           },
           {
             type: "Reason",
             text: "After cooking, these have a texture similar to minced meat and we can make them absorb water, fat, and flavourings.",
-          },
-          {
-            type: "Considerations",
-            text: "Dry soy crumbs absorbs around 2-3 times the weight in water and then even more oil. It results in around 3g of finished product.",
           },
           {
             type: "Replacements",
@@ -54,10 +55,9 @@ const recipe: Recipe = {
         weight: "5g",
         boxes: [
           {
-            type: "Info",
-            text: "Use the package as a source of how much to use. The saltiness of the resulting broth should be like soup.",
+            type: "Considerations",
+            text: "Use the packaging to determine how much to use. The saltiness of the resulting broth should be like soup, taste it.",
           },
-          { type: "Alternative", text: "1tbsp" },
         ],
       },
       ingredient: {
@@ -65,7 +65,7 @@ const recipe: Recipe = {
         post_span: ".",
         boxes: [
           {
-            type: "Info",
+            type: "Details",
             text: `Broth powder varies a lot in quality / taste. You can compare them by just adding a teaspoon to a cup of hot water and drinking it like tea. If you can find a "no-chicken" broth substitute, use that. I would recommend to use one that does have flavour enhancer (like MSG) and/or yeast extract for the savory / umami flavor. Do not use 'salt-free' broth, the main point of this is to add saltiness.`,
           },
           {
@@ -95,7 +95,7 @@ const recipe: Recipe = {
           },
           {
             type: "Considerations",
-            text: "If you use a soy:water ratio of ~1:2.5, they will completely absorb the water. If you don't want to measure, simply use enough to cover them with two centimeters above and strain the crumbs afterwards.",
+            text: "If you use a soy:water ratio of ~1:2.5, they will completely absorb the water. If you don't want to measure, simply use enough water to cover them with two centimeters above and strain the crumbs afterwards.",
           },
         ],
       },
@@ -132,19 +132,50 @@ const recipe: Recipe = {
       },
     },
     {
-      instruction: "Fry on high heat until they are browned and crispy.",
+      instruction: "Fry on high heat while stirring, until they are browned and crispy.",
       boxes: [
         {
           type: "Info",
-          text: "Make sure you use a large enough pan so that the crumbs have space for the moisture to evaporate (layer <1cm deep). Stir frequently for even browning.",
+          text: "Make sure you use a large enough pan so that the crumbs have space for the moisture to evaporate (layer <1cm deep). Stir frequently for even browning. To know they are done, take a spoon and taste a few. They should be firm and some should have crispy edges.",
         },
       ],
+    },
+    {
+      instruction: "Add",
     },
     {
       amount: { weight: "xxx g" },
       ingredient: {
         name: "Worcestershire Sauce",
+        post_span: ", and"
       },
+      boxes: [
+        {
+          type: "Replacements",
+          text: "Worcestershire Sauce gives a nice sweet, umami, meaty taste. Use soy sauce as an alternative, but it won't be as good.",
+        },
+      ],
+    },
+    {
+      amount: {
+        count: "1 clove",
+      },
+      ingredient: {
+        name: "minced garlic",
+        post_span: ","
+      },
+    },
+    {
+      amount: {
+        count: "lots",
+      },
+      ingredient: {
+        name: "freshly ground black pepper",
+        post_span: "."
+      }
+    },
+    {
+      instruction: "Fry for another minute, until any liquid is gone.",
     },
   ],
 };
