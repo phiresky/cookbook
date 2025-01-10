@@ -131,7 +131,7 @@ function IngredientMain({
   showDetailPopup: (step: IngredientStepInstru, t: DetailType) => void;
 }) {
   return (
-    <div className="max-w-lg mt-6 mx-auto">
+    <div className="max-w-lg mt-6 mx-auto px-2">
       <h1 className="text-xl mb-3">{recipe.title}</h1>
       <img src={recipe.main_picture} onLoad={redraw} />
       {recipe.preamble.map((p, i) => (
