@@ -24,8 +24,6 @@ type BoxVal = Partial<{
 export class BoxStorage {
   ingredients = new Map<IngredientStepInstru, BoxVal>();
   set(ingredient: IngredientStepInstru, val: BoxVal) {
-    if ("instruction" in ingredient)
-      console.log("setting ingredient", ingredient);
     this.ingredients.set(ingredient, {
       ...(this.ingredients.get(ingredient) ?? {}),
       ...val,
@@ -250,7 +248,6 @@ function HintBox({
   : null;
   const [visibleBox, setVisibleBox] = useState<boolean>(!detail?.text);
   if (!detail) return <></>;
-  console.log("rendering hint", step, detail);
   return (
     <div
       className={`${handwriting.className} bg-white p-2 left-full w-80 overflow-scroll mb-2 text-gray-600`}
@@ -272,12 +269,12 @@ function HintBox({
       )}
       {visibleBox &&
         detail.detailText?.map((box, j) => (
-          <>
-            <h3 key={j} className={`underline ${"text-black"}`}>
+          <Fragment key={j}>
+            <h3 className={`underline ${"text-black"}`}>
               {box.title}
             </h3>
             {box.text}
-          </>
+          </Fragment>
         ))}
     </div>
   );
