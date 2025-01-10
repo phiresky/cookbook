@@ -1,5 +1,6 @@
 import { getRecipeBySlug } from "@/common/recipes";
 import { ShowRecipe } from "@/components/ShowRecipe";
+import Head from "next/head";
 
 export function generateStaticParams() {
   return [{ slug: "tasty-meaty-soy-crumbs" }];
@@ -11,6 +12,11 @@ export default function Page(props: { params: { slug: string } }) {
     return <div>Recipe not found.</div>;
   }
   return (
-    <ShowRecipe recipe={recipe} />
+    <>
+      <Head>
+        <title>{recipe.title}</title>
+      </Head>
+      <ShowRecipe recipe={recipe} />
+    </>
   );
 }
