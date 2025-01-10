@@ -46,12 +46,12 @@ const recipe: Recipe = {
       },
     },
     {
-      instruction: "into a bowl. Add",
+      instruction: "into a bowl",
+      post_span: ". Add",
       detail: {
         detailButton: "Hint",
         detailText: [
           {
-            title: "Hint",
             text: "The bowl needs to be large, enough to fit 3x the amount",
           },
         ],
@@ -84,7 +84,7 @@ const recipe: Recipe = {
       },
     },
     {
-      instruction: "Then soak them in",
+      instruction: "Soak them in",
     },
     {
       amount: {
@@ -93,7 +93,7 @@ const recipe: Recipe = {
       ingredient: {
         name: "boiling water",
         detail: {
-          text: "If you use a soy:water ratio of ~1:2.5, they will completely absorb the water. If you don't want to measure, simply use enough water to cover them with two centimeters above and strain the crumbs afterwards.",
+          text: "If you use a solid:water ratio of around 1:2, they will completely absorb the water. If you don't want to measure, simply use enough water to cover them with two centimeters above and strain the crumbs afterwards.",
           detailButton: "Detail",
           detailText: [
             {
@@ -104,7 +104,8 @@ const recipe: Recipe = {
       },
     },
     {
-      instruction: "for 10 minutes.",
+      instruction: "for 10 minutes",
+      post_span: ".",
       detail: {
         detailButton: "Details",
         detailText: [
@@ -142,7 +143,8 @@ const recipe: Recipe = {
     },
     {
       instruction:
-        "Fry on high heat while stirring, until they are browned and crispy.",
+        "Fry on high heat while stirring, until they are browned and crispy",
+      post_span: ".",
       detail: {
         detailButton: "Details",
         detailText: [
@@ -191,7 +193,10 @@ const recipe: Recipe = {
     {
       instruction: "Fry for another minute, until any liquid is gone.",
     },
-    { instruction: "Optionally, add black soy sauce (for color), coriander and cumin."}
+    {
+      instruction:
+        "Optionally, add black soy sauce (for color), coriander and cumin.",
+    },
   ],
 };
 /*

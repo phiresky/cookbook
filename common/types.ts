@@ -7,6 +7,7 @@ export type Recipe = {
 export type IngredientStepInstru =
   | {
       instruction: string;
+      post_span?: string;
       detail?: StepDetail
     }
   | IngredientStep;
