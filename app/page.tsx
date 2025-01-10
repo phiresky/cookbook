@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { generateStaticParams } from "./recipe/[slug]/page";
 import { getRecipeBySlug } from "@/common/recipes";
+import { addBasePath } from 'next/dist/client/add-base-path';
 
 export default function Home() {
   return ( // centered flex with 3 items per row
@@ -11,11 +12,11 @@ export default function Home() {
         if (!recipe) return null;
         return <a
           key={params.slug}
-          href={`/recipe/${params.slug}`}
+          href={addBasePath(`/recipe/${params.slug}`)}
           className="relative w-80 h-80 overflow-hidden rounded-lg shadow-lg"
         >
           <Image
-            src={`/recipe/${recipe.main_picture}`}
+            src={addBasePath(`/recipe/${recipe.main_picture}`)}
             alt="picture"
             layout="fill"
             objectFit="cover"
