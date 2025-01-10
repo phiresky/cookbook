@@ -21,6 +21,8 @@ type BoxVal = Partial<{
   rightDetail: DOMRect;
   leftDetail: DOMRect;
 }>;
+
+const infoIcon = "ⓘ"; // 🛈
 export class BoxStorage {
   ingredients = new Map<IngredientStepInstru, BoxVal>();
   set(ingredient: IngredientStepInstru, val: BoxVal) {
@@ -196,7 +198,7 @@ function IngredientOrStep({
                 });
             }}
           >
-            {step.instruction}{step.detail && " 🛈"}
+            {step.instruction}{step.detail && " " + infoIcon}
           </span>{step.post_span}
         </p>
       </div>
@@ -301,7 +303,7 @@ function Ingredient({
             e && boxes.set(step, { leftTarget: e.getBoundingClientRect() });
           }}
         >
-          {step.amount.detail && "🛈"}{" "}
+          {step.amount.detail && infoIcon}{" "}
           {"weight" in step.amount
             ? step.amount.weight
             : "count" in step.amount
@@ -320,7 +322,7 @@ function Ingredient({
               e && boxes.set(step, { rightTarget: e.getBoundingClientRect() });
             }}
           >
-            {step.ingredient.name} {step.ingredient.detail && "🛈"}
+            {step.ingredient.name} {step.ingredient.detail && infoIcon}
           </span>
           <span className="text-gray-700 bg-white">
             {step.ingredient.post_span || ""}
