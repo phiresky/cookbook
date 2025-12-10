@@ -118,7 +118,7 @@ const recipe: Recipe = {
     { instruction: "Then, add them to a hot pan with" },
     {
       amount: {
-        weight: "20g (a lot)",
+        weight: "50g (a lot)",
         detail: {
           detailButton: "Why so much oil?",
           detailText: [
